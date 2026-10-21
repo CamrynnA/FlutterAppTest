@@ -10,6 +10,16 @@ String classifyScore(int score) {
   }
   return score >= 70 ? 'Pass' : 'Needs improvement';
 }
+// Functions used by extra tests.
+bool isScoreBlank(String score) {
+  return score.trim().isEmpty;
+}
+bool isScoreWholeNumber(String score) {
+  return int.tryParse(score) != null;
+}
+bool isNameValid(String name) {
+  return name.trim().isNotEmpty;
+}
 
 class GradeApp extends StatelessWidget {
   const GradeApp({super.key});

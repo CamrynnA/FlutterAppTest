@@ -1,3 +1,4 @@
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lab_8/main.dart';
 
@@ -27,5 +28,20 @@ void main() {
       expect(() => classifyScore(101), throwsRangeError);
     });
   });
+
+  group('Input validation', () {
+    test('blank score is rejected', () {
+      expect(isScoreBlank(''), true);
+    });
+
+    test('decimal score is rejected', () {
+      expect(isScoreWholeNumber('75.5'), false);
+    });
+
+    test('whitespace-only name is rejected', () {
+      expect(isNameValid('   '), false);
+    });
+  });
 }
+
 
