@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,13 +11,16 @@ String classifyScore(int score) {
   }
   return score >= 70 ? 'Pass' : 'Needs improvement';
 }
+
 // Functions used by extra tests.
 bool isScoreBlank(String score) {
   return score.trim().isEmpty;
 }
+
 bool isScoreWholeNumber(String score) {
   return int.tryParse(score) != null;
 }
+
 bool isNameValid(String name) {
   return name.trim().isNotEmpty;
 }
@@ -72,7 +76,6 @@ class _GradeHomePageState extends State<GradeHomePage> {
     final name = _nameController.text.trim();
     final score = int.tryParse(_scoreController.text.trim());
 
-    // Validation should make null unlikely, but guard against it anyway.
     if (score == null) {
       setState(() => _errorMessage = 'Enter a whole-number score.');
       return;
@@ -88,12 +91,23 @@ class _GradeHomePageState extends State<GradeHomePage> {
         _errorMessage = 'Score must be between 0 and 100.';
       });
     } catch (error) {
-      // Unexpected errors are not silently ignored.
       setState(() {
         _errorMessage = 'Something went wrong. Please try again.';
       });
       debugPrint('Unexpected grade validation error: $error');
     }
+  }
+
+  // Clears both fields and removes previous messages.
+  void _clear() {
+    _nameController.clear();
+    _scoreController.clear();
+    _formKey.currentState!.reset();
+
+    setState(() {
+      _resultMessage = null;
+      _errorMessage = null;
+    });
   }
 
   @override
@@ -164,6 +178,11 @@ class _GradeHomePageState extends State<GradeHomePage> {
                   FilledButton(
                     onPressed: _submit,
                     child: const Text('Validate score'),
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: _clear,
+                    child: const Text('Clear'),
                   ),
                   if (_errorMessage != null) ...[
                     const SizedBox(height: 16),
