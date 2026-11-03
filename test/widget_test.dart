@@ -42,6 +42,14 @@ void main() {
       expect(isNameValid('   '), false);
     });
   });
+testWidgets('Input fields display successfully.', (tester) async {
+  await tester.pumpWidget(const GradeApp());
+
+  expect(find.text('Student Grade Validator'), findsOneWidget);
+  expect(find.text('Student name'), findsOneWidget);
+  expect(find.text('Exam score (0–100)'), findsOneWidget);
+  expect(find.text('Validate score'), findsOneWidget);
+  });
 }
 
 

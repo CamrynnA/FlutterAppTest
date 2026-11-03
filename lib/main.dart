@@ -98,7 +98,7 @@ class _GradeHomePageState extends State<GradeHomePage> {
     }
   }
 
-  // Clears both fields and removes previous messages.
+  // Clear button
   void _clear() {
     _nameController.clear();
     _scoreController.clear();
